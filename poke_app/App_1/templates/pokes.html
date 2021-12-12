@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido a Me gusta_app</title>
+  </head>
+  <body>
+      <div>
+          <button type="reset" name='logout' >
+      </div>
+      <div class= "container-1">
+          <p>Hola {{User.name}}
+          </p>
+      </div>
+      <div class="container-2">
+          <p>Este es el listado de tus me gusta</p>
+        <table>
+            {% for usuario in pokes.poke_it.all %}
+            <tr>    
+                <td> {{usuario.conteo_megusta}} </td>
+            </tr>
+            {% empty %}
+                <p>Tu no tienes me gusta</p>
+            </thead>
+            {% endfor %}
+        </table>
+      </div>
+      <div class="container-3">
+            <p>Dale Me gusta a alguno de los usuarios</p>
+          <table>
+              {% lista_usuarios%}
+              {% for usuario in usuarios %}
+                <td>{{poke_it.Poke}}</td>
+                <td>{{poke_list.add.usuario}}</td>
+                <td>{{poke_it.created_at} </td>
+              {% endfor %}
+
+          </table>
+      </div>
+  </body>
+</html>

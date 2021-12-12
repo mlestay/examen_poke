@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido a Poke_app</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+  </head>
+  <body>
+    <div class="container-welcome">
+        <div class="container-1">
+            <h1>"BIENVENIDO A LA APP"</h1>
+            <h1>REGISTRO</h1>
+            {% for message in messages %}
+                {% if 'registered' in message.extra_tags %}
+                        <div class="alert alert-success" role="alert">
+                                {{message}}
+                        </div>
+                {% endif %}
+
+            {% endfor %}
+            <form action = '/index' method = 'POST'>
+                {% csrf_token %}
+                {% for message in messages %}
+                        {% if 'fn_error' in message.extra_tags %}
+                        <div class="alert alert-danger" role="alert">
+                                {{message}}
+                        </div>
+                        {% endif %}
+                    
+                {% endfor %}
+                    <p>
+                            <label for="formGroupExampleInput">Name</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput" name = "name">
+                    </p>
+
+                    <div class="h2">
+                            <label for="formGroupExampleInput">Alias</label>
+                            {% for message in messages %}
+                                    {% if 'ln_error' in message.extra_tags %}
+                                    <div class="alert alert-danger" role="alert">
+                                            {{message}}
+                                    </div>
+                                    {% endif %}
+                                
+                            {% endfor %}
+                            <input type="text" class="form-control" id="formGroupExampleInput" name = 'alias'>
+                    </div>
+
+                    <div class="h2">
+                            <label for="formGroupExampleInput">Email</label>
+                {% for message in messages %}
+                            {% if 'email_error' in message.extra_tags %}
+                            <div class="alert alert-danger" role="alert">
+                                    {{message}}
+                            </div>
+                            {% endif %}
+                        
+                {% endfor %}
+                            <input type="text" class="form-control" id="formGroupExampleInput" name = 'email'>
+                    </div>
+
+                    <div class="h2">
+                            <label for="formGroupExampleInput">Password</label>
+                            {% for message in messages %}
+                                        {% if 'pw_error' in message.extra_tags %}
+                                        <div class="alert alert-danger" role="alert">
+                                                {{message}}
+                                        </div>
+                                        {% endif %}
+                                    
+                            {% endfor %}
+                            <input type="password" class="form-control" id="formGroupExampleInput" name = 'password'>
+                    </div>
+                
+                    <div class="h2">
+                            <label for="formGroupExampleInput">Confirm Password</label>
+                            <input type="password" class="form-control" id="formGroupExampleInput" name = 'confirm_password'>
+                    </div>
+                    <div class="h2">
+                        <label for="formGroupExampleInput">Fecha de Nacimiento</label>
+                        <input type="date" class="form-control" id="formGroupExampleInput" name = 'date_of_birthday'>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Register</button>
+            </form>
+        </div>
+        <div class="container-2">
+            <h1> LOGIN </h1>
+            <form action='/login' method='POST'>
+                {% csrf_token %}
+                {% for message in messages %}
+                        {% if 'log_error' in message.extra_tags %}
+                        <div class="alert alert-danger" role="alert">
+                                {{message}}
+                        </div>
+                        {% endif %}
+                {% endfor %}
+                        <div class="ml-5  form-group w-25">
+                                <label for="formGroupExampleInput">Email</label>
+                        {% for message in messages %}
+                                {% if 'mal_dato_login_e' in message.extra_tags %}
+                                       <div class="alert alert-danger" role="alert">
+                                                {{message}}
+                                        </div>
+                                {% endif %}
+                        {% endfor %}
+                                        <input type="text" class="form-control" id="formGroupExampleInput" name = 'email'>
+                        </div>
+    
+                        <div class="ml-5  form-group w-25">
+                                       <label for="formGroupExampleInput">Password</label>
+                            {% for message in messages %}
+                                    {% if 'mal_login_pass_dato' in message.extra_tags %}
+                                            <div class="alert alert-danger" role="alert">
+                                                    {{message}}
+                                            </div>
+                                    {% endif %}
+                                
+                            {% endfor %}
+                                            <input type="password" class="form-control" id="formGroupExampleInput" name = 'password'>
+                        </div>
+    
+                        <button type="submit" class="ml-5 btn btn-primary">Login</button>
+                </form>
+        </div>
+  </body>
+</html>
